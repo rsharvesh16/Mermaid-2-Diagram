@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt to Mermaid.js Converter</title>
+</head>
+<body>
+    <h1>Prompt to Mermaid.js Converter</h1>
+    <form action="/convert" method="post">
+        <label for="prompt">Enter your prompt:</label><br>
+        <textarea id="prompt" name="prompt" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Convert">
+    </form>
+
+    <!-- Include Mermaid.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid after page load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Render Mermaid diagrams
+            mermaid.init();
+        });
+    </script>
+</body>
+</html>
