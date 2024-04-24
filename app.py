@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Configure Google API
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-model = genai.GenerativeModel("gemini-pro")
+# model = genai.GenerativeModel("gemini-pro")
 
 @app.route('/')
 def index():
@@ -18,10 +18,15 @@ def index():
 @app.route('/convert', methods=['POST'])
 def convert_prompt():
     prompt = request.form['prompt']
+
+    input_prompt = """You are an expert in understanding The UML(Unified Modeling Language) Diagrams, Flowcharts, Class Diagrams,
+    and All types of Diagrams required for making reports, flowcharts etc. When a User gives a prompt, Change the Given Prompt
+    to Mermaid Code"""
+
     
     # Call Google Gemini Pro API to generate response
-    response = model.generate_content(prompt)
-    gemini_text = response.text
+    response = generate_response(prompt, input_prompt)
+    gemini_text = response
     
     # Convert Gemini response to Mermaid.js code
     mermaid_code = convert_to_mermaid(gemini_text)
@@ -53,8 +58,13 @@ def convert_to_mermaid(text):
                     # Remove triple backticks from each line
                     clean_item = item.strip().replace("`", "")
                     mermaid_code += f"    {title} --> {clean_item}\n"
-
+    print(mermaid_code)
     return mermaid_code
+
+def generate_response(input_text, prompt):
+    model = genai.GenerativeModel("gemini-pro")
+    response = model.generate_content([input_text, "", prompt])
+    return response.text
 
 if __name__ == '__main__':
     app.run(debug=True)
