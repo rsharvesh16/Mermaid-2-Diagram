@@ -7,7 +7,7 @@ import base64
 load_dotenv()
 
 # Configure Google API
-genai.configure(api_key="AIzaSyBNNgDh-dr08FahrDZSZe1tpASuQFhZDog")
+genai.configure(api_key="YOUR GOOGLE_API_KEY")
 # model = genai.GenerativeModel("gemini-pro")
 
 def mm(graph):
