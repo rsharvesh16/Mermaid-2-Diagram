@@ -7,34 +7,6 @@ import base64
 
 # Configure Google API
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-# model = genai.GenerativeModel("gemini-pro")
-
-# def convert_to_mermaid(text):
-#     # Start the Mermaid diagram definition
-#     mermaid_code = "graph TD;\n"
-
-#     # Split the text into sections (Actors and Use Cases)
-#     sections = text.split("**")
-
-#     # Process Actors and Use Cases sections
-#     for section in sections:
-#         lines = section.strip().split("\n")
-
-#         if len(lines) > 1:
-#             # Actor or Use Case section found
-#             title = lines[0].strip()
-
-#             # Add the actor or use case as a node
-#             mermaid_code += f"    {title}\n"
-
-#             # Add connections for each item under the actor or use case
-#             for item in lines[1:]:
-#                 if item.strip():
-#                     # Remove triple backticks from each line
-#                     clean_item = item.strip().replace("`", "")
-#                     mermaid_code += f"    {title} --> {clean_item}\n"
-#     return mermaid_code
-
 import streamlit as st
 import os
 import google.generativeai as genai
@@ -44,7 +16,7 @@ import base64
 load_dotenv()
 
 # Configure Google API
-genai.configure(api_key="AIzaSyBNNgDh-dr08FahrDZSZe1tpASuQFhZDog")
+genai.configure(api_key="YOUR GOOGLE_API_KEY")
 # model = genai.GenerativeModel("gemini-pro")
 
 def mm(graph):
