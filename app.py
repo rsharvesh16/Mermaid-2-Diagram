@@ -50,25 +50,6 @@ def generate_response(input_text, prompt):
     response = model.generate_content([input_text, "", prompt])
     return response.text
 
-def star_rating(rating):
-    """
-    Generate a star rating HTML string based on the given rating.
-    """
-    # Define the maximum rating (number of stars)
-    max_rating = 5
-    # Limit rating to be within 0 to max_rating
-    rating = min(max_rating, max(0, rating))
-    
-    # Create a string of filled stars based on the rating
-    filled_stars = "★" * int(rating)
-    # Create a string of empty stars for the remaining space
-    empty_stars = "☆" * (max_rating - int(rating))
-    
-    # Combine filled and empty stars to form the star rating string
-    star_rating_str = filled_stars + empty_stars
-    
-    return star_rating_str
-
 # Main function
 def main():
     
@@ -82,17 +63,14 @@ def main():
     option = st.selectbox("Choose Option", ["Flowchart"])
 
     if option == "Flowchart":
-        prompt = st.text_area("Enter your prompt:", "")
+        prompt = st.text_area("Enter your prompt:", "", placeholder="eg. Create a flowchart on")
 
-        if st.button("Generate Flowchart"):
+
+        if st.button("Generated Flowchart"):
             mermaid_link = generate_mermaid_link(prompt)
             st.markdown('<h2 style="text-align: center;">Generated Flowchart</h2>', unsafe_allow_html=True)
             st.markdown(f'<img src="{mermaid_link}" alt="UML Diagram" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%;" />', unsafe_allow_html=True)
             print(mermaid_link)
-        
-    rating = st.slider("Rate this app", min_value=0, max_value=5, step=1)
-    # Display the star rating
-    st.write(f"### Your Rating: {star_rating(rating)}")
 
 if __name__ == '__main__':
     main()
